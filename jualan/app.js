@@ -203,10 +203,15 @@ $('.message-info').on('click', '.btn-close', function() {
 $('.dropdown-menu-toggle').on('click', function() {
  $(this).parents('.dropdown-user-menu').toggleClass('is-expanded')
 });
+
+
+
 if ($('.dropdown-subdistrict').length > 0) {
+  var actual_JSON = $.getJSON( "https://raw.githubusercontent.com/irfnrdh/insta/master/data.json")
  $('.dropdown-subdistrict').select2({
   minimumInputLength: 3,
   ajax: {
+   //url: actual_JSON,
    url: window.BASE_URL + 'ajax-destination',
    dataType: 'json',
    processResults: function(data) {

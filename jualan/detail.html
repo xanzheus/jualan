@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="frontend.bundle.css">
+    <link href="select2.min.css" rel="stylesheet" />
+    <title>Jualan - Judul Produk </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    </head>
+
+<body class="page-checkout">
+
+    
+<nav class="navbar-header bg-theme py-3">
+    <div class="container container-mobile position-relative">
+        <a href="index.html" class="btn btn-link btn-back"><i class="icon-back"></i>
+            <span class="header-title ml-2">Back</span>
+        </a>
+        <h1 class="page-title text-white">Checkout</h1>
+    </div>
+</nav>
+
+<div class="container container-mobile">
+
+    <div id="content">
+
+        <form method="POST">
+            <div class="card card-checkout">
+                <div class="card-body">
+                    <h4 class="label-title text-center">DATA PENERIMA</h4>
+                    <div class="form-group">
+                        <label for="buyer_name" class="sr-only">Nama Lengkap</label>
+                        <input type="text" class="form-control" placeholder="Nama Lengkap" name="name" id="buyer_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="buyer_phone" class="sr-only">No. WhatsApp</label>
+                        <div class="input-group with-icon">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="icon-whatsapp"></i></div>
+                            </div>
+                            <input type="text" class="form-control" placeholder="No. WhatsApp" name="phone" required pattern="[0-9]+" minlength="10" id="buyer_phone">
+                        </div>
+                    </div>
+                    <div class="form-group mb-0">
+                        <label for="buyer_email" class="sr-only">Email Aktif</label>
+                        <div class="input-group with-icon">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="icon-mail"></i></div>
+                            </div>
+                            <input type="email" class="form-control" placeholder="Email Aktif" name="email" id="buyer_email" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- product box -->
+            <h4 class="label-title text-center">DETAIL PEMBELIAN</h4>
+            <div class="product-box">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/1080" alt="Judul Produk" class="img-fluid product-image">
+                </div>
+                <div class="product-detail">
+                    <h4 class="product-title">Judul</h4>
+                    <div class="product-detail-footer">
+                                                    <div class="product-quantity">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Qty</span>
+                                    </div>
+                                    <input class="form-control qty" name="qty" type="number" min="1" value="1" max="50" required/>
+                                </div>
+                            </div>
+                            <div class="weight" style="display:none" value="Isikan nilai harga"></div>
+                                                <span class="price-regular">Rp harga</span>
+                    </div>
+                </div>
+            </div>
+                            <div class="price-group ongkir-field mb-3">
+                    <label>Ongkos kirim</label>
+                    <strong class="price-label has-edit-button">
+                        <a id="edit-destination" href="#" class="btn btn-outline-primary btn-sm mr-2"><i class="icon-edit"></i></a>
+                        <span class="shipping-price">Rp -</span>
+                    </strong>
+                    <a id="select-destination" class="btn btn-primary btn-sm" href="#">Pilih Kota</a>
+                    <div class="check-button-group has-float-label is-first">
+                        <label for="input_subdistrict">Tujuan pengiriman</label>
+                        <select name="subdistrict" id="input_subdistrict" class="form-control dropdown-subdistrict" required></select>
+                    </div>
+                                        <div class="check-button-group has-float-label">
+                        <label for="buyer_address">Detail alamat</label>
+                        <textarea class="form-control" rows="2" placeholder="Tulis nomor rumah, RT/RW, kelurahan" name="address" id="buyer_address" required></textarea>
+                        <!-- <small class="text-muted d-block">Tulis nomor rumah, RT/RW, kelurahan</small> -->
+                    </div>
+                    <div class="check-button-group has-float-label">
+                        <label for="buyer_zipcode">Kode POS (opsional)</label>
+                        <input type="text" class="form-control" name="postal_code" pattern="[0-9]+" maxlength="5" id="buyer_zipcode">
+                    </div>
+                                        <div class="check-button-group has-float-label">
+                        <label for="input_service">Pilih Kurir</label>
+                        <select class="form-control dropdown-ongkir" id="input_service" name="service" required></select>
+                    </div>
+                    <div class="check-button-group">
+                        <a id="confirm-destination" class="btn btn-success btn-block confirm-destination" href="#" disabled="disabled"><i class="icon-checkmark mr-2"></i>Simpan</a>
+                    </div>
+                </div>
+                
+                <hr>
+                <div class="price-group">
+                    <label>Total</label>
+                    <strong class="price-label total">Rp 499.900</strong>
+                </div>
+                <hr>
+                <div class="form-group mb-0">
+                    <div class="d-flex align-items-center">
+                        <label for="buyer_note" class="mb-0">Catatan ke penjual</label>
+                        <label class="ml-auto mb-0"><input type="checkbox" class="mr-2"  data-toggle="collapse" data-target="#buyer_note" aria-expanded="true">Tidak perlu</label>
+                    </div>
+                    <textarea class="form-control collapse show mt-2" name="note" id="buyer_note" rows="2" placeholder="Contoh: Size M, Warna Putih"></textarea>
+                </div>
+            
+            <div class="form-group form-group-submit mt-4">
+                <button type="submit" class="btn btn-primary btn-block btn-submit" disabled>Bayar Sekarang</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.STORE = 'Nama Jualan'; // nama toko
+    window.PRODUCT_WEIGHT = '400'; //berat produk
+    window.PRODUCT_PRICE = '499900'; //harga produk
+    window.SHIP_COST = '0';
+    window.PRODUCT_GUID = '576800bf3d72e169d399e6343114a43e';
+</script>
+
+    <script type="text/javascript">
+        window.BASE_URL = 'https://belanja.bio/';
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+    <script type="text/javascript" src="data.js"></script>
+    <script src="app.js"></script>
+
+</body>
+
+</html>
