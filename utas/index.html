@@ -1,0 +1,525 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://utas.me/assets/frontend.bundle.css?v=2021.07.15">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://utas.me/assets/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="https://utas.me/assets/css/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <link href="https://utas.me/assets/css/responsive.dataTables.min.css" rel="stylesheet"/>
+    <title>RuemaDesigns</title>
+    <meta name="description" content="Toko makanan tumpeng dan nasi kotak">
+
+    
+    <link rel="icon" href="https://utas.me/favicon.ico">
+    <link rel="manifest" href="https://utas.me/site.webmanifest">
+    <link rel="mask-icon" href="https://utas.me/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+        
+            
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+</head>
+
+<body class="  ">
+<nav id="header-page" class="navbar navbar-expand-lg navbar-light nav-top mb-n5">
+    <div class="container container-mobile">
+        <div class="d-flex align-items-center" style="width: 100px">
+            <button class="btn btn-back-to-grid border-right rounded-0 py-0" type="button">
+                <i class="icon-arrow-back"></i>
+            </button>
+            <button class="btn btn-search" type="button" data-toggle="modal" data-target="#search-form">
+                <i class="icon-search"></i>
+            </button>
+        </div>
+
+        <a href="https://utas.me/mayka_food" class="navbar-brand">
+            <img src="https://ui-avatars.com/api/?name=mayka_food&background=338eea&color=fff" height="36">
+        </a>
+
+        <div class="header-menu-left" style="width: 100px">
+    <div class="dropdown">
+        <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="btn-icon icon-menu"></i>
+                <i class="btn-icon icon-close small"></i>
+                            <span class="btn-text font-weight-bold ml-2">Menu<span>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <div class="theme-button">
+                <a role="button" class="dropdown-item px-3 switch_theme align-items-center py-2" data-theme="dark" data-toggle="button" aria-pressed="false">
+                    <i class="icon-moon-outline h5 mb-0 icon-theme"></i>
+                    <span class="ml-3">View in dark theme<span>
+                </a>
+                <a role="button" class="dropdown-item px-3 switch_theme align-items-center py-2" data-theme="light" data-toggle="button" aria-pressed="false">
+                    <i class="icon-sunny-outline h5 mb-0 icon-theme"></i>
+                    <span class="ml-3">View in light theme<span>
+                </a>
+            </div>
+            <div class="dropdown-divider"></div>
+                            <a role="button" class="dropdown-item px-3 py-2 align-items-center d-flex" type="button" data-toggle="modal" data-target="#login-form">
+                    <i class="icon-log-in-outline h5 mb-0"></i>
+                    <span class="ml-3">Customer Login</span>
+                </a>
+                    </div>
+    </div>
+</div>    
+    </div>
+</nav>
+<div class="container container-mobile flex-1">
+    <div id="bio" class="py-4 text-center small">
+        <div class="avatar text-center mt-3">
+            <div class="ph-item-profile ph-shadow mb-2"></div>
+            <img src="https://ui-avatars.com/api/?name=mayka_food&background=338eea&color=fff" alt="Mayka_food" width="72" height="72" class="mb-2 rounded-circle"  style="display:none;">
+            <h6 class="mb-2">RuemaDesigns</h6>
+        </div>
+                <p class="mb-0">Toko makanan tumpeng dan nasi kotak</p>
+                                
+        </div>
+</div>
+
+<!-- testing -->
+
+<div class="container container-mobile flex-1">
+    <div id="content" class="display-grid content1" >
+
+        
+<script>
+     window.PRODUCTS = parseInt('0');
+     window.TOTALPRODUCTS = parseInt('');
+     window.BUY_AGAIN = 'Beli lagi';
+</script>        
+    </div>
+
+    <div id="content" class="display-grid content2"  style="display:none;">
+
+    </div> 
+
+    <div id="info-box" class="d-none">
+        <i class="icon-hand-tap mr-2 h5"></i>
+        <span>Ketuk gambar untuk berbelanja</span>
+        <button class="btn btn-link btn-close" type="button">Ok</button>
+    </div>
+
+    <div class="text-center pb-3" id="loadmore-wrapper" style="display: none;">
+        <button type="button" class="btn btn-light bg-transparent text-inherit btn-sm px-3" id="btn-loadmore" data-offset="0">Lihat pos lainnya<i class="icon-arrow-down ml-2 align-middle"></i></button>
+    </div>
+
+</div>
+
+
+<!-- form product cart -->
+<div id="product-cart" style="display:none;">
+    <!-- product added notification -->
+    <div class="cart-info" style="display: none;"><i class="icon-checkmark-circle mr-2"></i><span class="text">#</span></div>
+    <!-- delete product confirmation -->
+    <div class="confirmation-dialog bg-white">
+        <div class="dialog-body py-3">
+            <h5 class="dialog-title">Hapus item?</h5>
+            <p class="mb-0">Item ini akan dihapus dari keranjang Anda</p>
+        </div>
+        <div class="dialog-footer">
+            <button type="button" class="btn btn-light btn-cancel text-inherit">Batal</button>
+            <button type="button" class="btn btn-danger btn-confirm-delete">Hapus</button>
+        </div>
+    </div>
+    <!-- end delete product confirmation -->
+    <div class="container container-mobile">
+        <div class="product-cart-body">
+            <div class="product-bar">
+                <div id="selected-product" class="bg-white">
+                    <div class="scroll-area product-box user-cart border-bottom">
+
+                    </div>
+                </div>
+                <div class="product-bar-footer bg-white">
+                    <button class="btn btn-expand text-inherit" type="button"><i class="icon-chevron-up"></i></button>
+                    <div class="selected-info footer-item">
+                        <i class="icon-cart mr-2 text-warning"></i>
+                        <small>Keranjang</small>
+                        <strong class="ml-1">(<span id="total-product-selected">0</span>)</strong>
+                    </div>
+                    <div class="total-price footer-item">
+                        <small class="mr-1">Total</small>
+                        <strong class="total-cart-price"></strong>
+                    </div>
+                </div>
+            </div>
+            <a href="https://utas.me/mayka_food/checkout"
+               class="btn btn-primary" id="btn-checkout">Lanjutkan ke pembayaran                <i class="icon-arrow-forward-circle icon ml-2"></i></a>
+        </div>
+    </div>
+</div>
+
+<div class="product-cart-overlay"></div>
+
+<!-- modals -->
+
+<!-- Login form -->
+    <!-- login form -->
+<div class="modal fade modal-compact modal-slide from-top" tabindex="-1" role="dialog" aria-hidden="true" id="login-form">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon-close"></i>
+                </button>
+
+                <!-- login area -->
+                <div id="login-area" class="collapse show">
+                    <h4 class="label-title form-title text-center text-uppercase"> Login Pelanggan </h4>
+                    <form action="#" id="login-email">
+                        <a href="https://utas.me/mayka_food/social-login?provider=Facebook" class="btn btn-light bg-white btn-block font-weight-bold d-flex align-items-center justify-content-center text-inherit">
+                            <i class="icon-logo-facebook text-brand-facebook mr-2 h4 mb-0"></i>
+                            Masuk dengan Facebook                        </a>
+                        <!-- <div class="form-group mb-0 col-6">
+                            <a href="https://utas.me/mayka_food/social-login?provider=Google" class="btn btn-google btn-block d-flex align-items-center justify-content-center"><i class="icon-logo-google mr-2"></i>Google</a>
+                        </div> -->
+                        <div class="separator-or">
+                            <div><span class="bg-white">Atau</span></div>
+                            <hr>
+                        </div>
+                        <div class="form-label-group mb-2">
+                            <input id="user_email" type="email" name="email" class="form-control" placeholder="Masukkan alamat email" required>
+                            <label for="user_email"><i class="icon-mail mr-2"></i>Email address</label>
+                        </div>
+                        <div class="form-group btn-verify">
+                            <button class="btn btn-primary btn-block btn-process-login font-weight-bold btn-icon" type="submit"><i class="icon-log-in h4 mb-0 mr-2"></i>Login Sekarang</button>
+                        </div>
+                        <hr>
+                    <div class="d-flex align-items-center justify-content-center my-n2 text-muted">Belum jadi member? <button class="btn btn-link font-weight-bold go-register" type="button">Daftar disini</button></div>
+                    </form>
+                    <form action="https://utas.me/mayka_food/verify" id="login-verify" class="collapse">
+                        <div class="alert alert-warning my-3 text-center">
+                            Masukkan kode login yang dikirim ke email <strong id="mailto"></strong>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="otp" class="sr-only">Masukkan kode login disini</label>
+                            <input id="otp" type="text" name="otp" class="form-control" placeholder="Masukkan kode login">
+                            <input type="hidden" name="hash" class="login-hash" />
+                        </div>
+                        <div class="form-group mb-0">
+                            <button type="submit" class="btn btn-primary btn-block btn-login font-weight-bold">Login Sekarang</button>
+                        </div>
+                    </form>                    
+                </div>
+
+                <!-- register area -->
+                <div id="register-area" class="collapse">
+                    <div id="register-form">
+                        <h4 class="label-title form-title text-center">DAFTAR MEMBER</h4>
+                        <div class="alert alert-info">
+                            <h6>Keuntungan yang Anda dapatkan:</h6>
+                            <small class="mb-2 d-block"><i class="icon-checkmark-circle-o mr-2"></i>Alamat Anda dapat disimpan</small>
+                            <small class="mb-2 d-block"><i class="icon-checkmark-circle-o mr-2"></i>Belanja jadi lebih mudah dan cepat</small>
+                            <small class="mb-2 d-block"><i class="icon-checkmark-circle-o mr-2"></i>Dapatkan lebih banyak diskon</small>
+                            <small class="d-block"><i class="icon-checkmark-circle-o mr-2"></i>Pesanan Anda diprioritaskan</small>
+                        </div>
+                        <form action="#" id="register-email">
+                            <div class="form-label-group mb-2">
+                                <input id="register_email" type="email" name="email" class="form-control" placeholder="Masukkan alamat email" required>
+                                <label for="register_email"><i class="icon-mail mr-2"></i>Email address</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block btn-register font-weight-bold">Daftar Sekarang</button>
+                            </div>
+                        </form>
+                        <hr>
+                        <div class="d-flex align-items-center justify-content-center my-n2 text-muted">Sudah jadi member?<button class="btn btn-link font-weight-bold" type="button" id="go-login">Login di sini</button></div>
+                    </div>
+                    <form action="https://utas.me/mayka_food/verify" id="activation-verify" class="collapse">
+                        <h4 class="label-title form-title text-center">VERIFIKASI AKUN</h4>
+                        <div class="alert alert-warning my-3 text-center">
+                            Harap masukkan kode verifikasi yang dikirim ke email <strong id="mailto"></strong>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label for="activation_key" class="sr-only">Masukkan kode aktivasi</label>
+                            <input id="activation_key" type="text" name="activation_key" class="form-control" placeholder="Masukkan kode aktivasi" required>
+                        </div>
+                        <div class="form-group mb-0">
+                            <button type="submit" class="btn btn-primary btn-block btn-login font-weight-bold">Verifikasi Sekarang</button>
+                        </div>
+                    </form>                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="form-dialog">
+        <div class="form-dialog-item bg-white registration-dialog">
+            <h3>Anda belum terdaftar</h3>
+            <p class="text-muted"><small>Anda ingin daftar sekarang?</small></p>
+            <div class="button-group">
+                <button class="btn btn-link btn-cancel">Batal</button>
+                <button class="btn btn-primary font-weight-bold go-register" type="button">Ya</button>
+            </div>
+        </div>
+        <div class="form-dialog-item bg-white activation-dialog d-none">
+            <h3>Pendaftaran berhasil</h3>
+            <p class="text-muted"><small>Silakan cek email Anda untuk menerima link aktivasi pendaftaran</small></p>
+            <div class="button-group">
+                <button class="btn btn-primary font-weight-bold btn-cancel">Kembali</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- share link modal -->
+<div class="modal fade modal-compact modal-slide from-top share-direct-link" tabindex="-1" role="dialog" aria-hidden="true" id="share-link-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon-close"></i></button>
+                <h4 class="label-title form-title text-center">Bagikan Postingan</h4>
+                <p class="text-muted">Silakan salin tautan di bawah ini dan bagikan di media sosial Anda!</p>
+                <div class="rounded-3 link-wrapper" style="border-radius: 8px;">
+                    <div class="card card-body border bg-white p-2 px-3 flex-row justify-content-between align-items-center direct-link-product">
+                        <div>
+                            <span class="link-product-title">Link Postingan</span>
+                        </div>
+                        <div>
+                            <button data-clipboard="data-clipboard-link-product" type="button" class="btn btn-link" style="padding: 0;"><i class="icon-copy-outline mr-2"></i>Salin Link</button>
+                        </div>
+                    </div>
+                    <div class="card card-body border bg-white p-2 px-3 flex-row justify-content-between align-items-center mt-2 direct-link-checkout">
+                        <div class="link-checkout-title">
+                            <span>Pembayaran Langsung</span>
+                        </div>
+                        <button data-clipboard="data-clipboard-link-checkout" type="button" class="btn btn-link" style="padding: 0;"><i class="icon-copy-outline mr-2"></i>Salin Link</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- contact us modal -->
+<div class="modal fade modal-compact modal-slide" tabindex="-1" role="dialog" aria-hidden="true" id="contact-us-modal">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="modal-container">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon-close"></i></button>
+                    <h4 class="label-title form-title text-center">Connect With Us</h4>
+<div class="contact-list mb-3">
+
+        
+            <a data-href="" href=""
+            class="btn btn-light bg-transparent text-inherit btn-brand redirect"><span class="btn-text"></span></a>
+    
+</div>
+    <a data-href="https://wa.me/082141046834" href="https://wa.me/082141046834"
+        target="_blank"
+        class="btn btn-light bg-transparent text-inherit btn-brand redirect d-flex w-100 my-1"><span class="btn-text">Chat via WhatsApp</span></a>
+
+    <a data-href="mailto:ika.ratna590@gmail.com" href="mailto:ika.ratna590@gmail.com"
+        target="_blank"
+        class="btn btn-light bg-transparent text-inherit btn-brand redirect d-flex w-100 my-1"><span class="btn-text">Contact via Email</span></a>
+
+    <address class="small mb-n1 mt-2"><i class="icon-location mr-1"></i>Jl. Letkol istiqlah aspol penataban giri banyuwangi</address>
+                                        <div class="mt-3 mb-n3">
+                        <a href="" class="copyright-logo" target="_blank">
+                            <img src="https://app.utas.co/assets/images/utas-logo-dark.svg" height="20"/>
+                        </a>
+                    </div>
+                                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- product detail -->
+<div class="modal fade modal-compact modal-slide" tabindex="-1" role="dialog" aria-hidden="true" id="product-detail">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="icon-close"></i>
+                </button>
+                <div class="product-box mb-2">
+                    <div class="product-item">
+                        <div class="product-image">
+                            <img src="#" alt="#" class="img-fluid product-image">
+                        </div>
+                        <div class="product-detail">
+                            <h4 class="product-title">#</h4>
+                            <span class="price-regular product-price ml-auto">#</span>
+                            <br/><span>Stok : </span><span class="product-stock ml-auto">#</span>
+                        </div>
+                        <div class="product-detail-footer">
+
+                            <!-- if stock by variant -->
+                            <div class="product-variant footer-item">
+                                <label>
+                                    <span class="label-text variant-label"></span>
+                                    <select class="form-control form-control-sm variant-dropdown"></select>
+                                </label>
+                            </div>
+                            <!-- end if stock by variant -->
+
+                            <div class="footer-item">
+                                <label class="mb-1">Total</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button type="button" class="btn btn-sm btn-light btn-minus text-inherit"><i class="icon-remove"></i></button>
+                                    </div>
+                                    <input class="form-control form-control-sm variant-qty" name="qty" type="number" min="1" value="1" max="" required/>
+                                    <div class="input-group-append">
+                                        <button type="button" class="btn btn-sm btn-light btn-plus text-inherit"><i class="icon-add"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:;" class="btn btn-primary btn-block btn-add">Beli</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- push notif modal -->
+<div class="modal fade modal-compace" id="push-notif-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-auto pr-0">
+                        <img src="https://ui-avatars.com/api/?name=mayka_food&background=338eea&color=fff" class="rounded-circle" height="54" width="54">
+                    </div>
+                    <div class="col">
+                        <h6>Subscribe untuk dapatkan info terbaru dari Kami.</h6>
+                        <p class="mb-0 text-muted"><small>Anda dapat mematikan notifikasi langsung dari browser Anda</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 pt-0">
+                <button type="button" class="btn btn-link px-4 text-decoration-none" id="show-subscribe-btn" data-dismiss="modal">Later</button>
+                <button type="button" class="btn btn-primary px-4 btn-subscribe">Langganan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- search modal  -->
+<!-- login form -->
+<div class="modal fade modal-compact modal-slide from-top" tabindex="-1" role="dialog" aria-hidden="true" id="search-form">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="input-group-icon input-prepend input-append">
+                    <span class="input-icon"><i class="icon-search"></i></span>
+                    <input type="search" id="search" class="form-control" placeholder="Cari nama item">
+                    <a class="btn btn-close input-icon" id="cancel-search-form" data-dismiss="modal" aria-label="Close"><i class="icon-close"></i></a>
+                </div>              
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- form opt-in modal  -->
+<div class="modal fade modal-compact modal-slide" tabindex="-1" role="dialog" aria-hidden="true" id="optin-form">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i
+                        class="icon-close"></i></button>
+                <form method="POST" action="">
+                    <h5 class="modal-title w-100 text-center mb-3">Form Optin Title</h5>
+                    <div class="scroll-area">
+
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-optin-submit">Kirimkan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    window.STORE = 'mamaniatoko';
+    window.DISPLAYNAME = 'Mayka_food';
+    window.SLUG = '';
+</script>
+
+<script type="text/template" id="template-field">
+    <div class="form-group">
+        <label class="label">
+            %field%
+        </label>
+    </div>
+</script>
+
+<script type="text/template" id="template-cart-item">
+    <div class="product-item">
+        <button type="button" class="btn btn-remove text-danger" data-cart-key="%cart_key%"><i class="icon-close"></i></button>
+        <div class="product-image">
+            <img src="%image%" class="img-fluid product-image">
+        </div>
+        <div class="product-detail">
+            <h4 class="product-title">%name%</h4>
+            <div class="product-detail-footer mt-2">
+                <div class="input-group w-auto" %hide_btn% >
+                    <div class="input-group-prepend">
+                        <button type="button" class="btn btn-sm btn-light text-inherit btn-minus"><i class="icon-remove"></i></button>
+                    </div>
+                    <input type="number" data-cart-key="%cart_key%" data-product-guid="%product_guid%"
+                        class="form-control form-control-sm product-quantity" value="%qty%" min="1" max="%qty_max%">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-sm btn-light text-inherit btn-plus"><i class="icon-add"></i></button>
+                    </div>
+                </div>
+                <span class="price-regular product-price ml-2 text-nowrap">%price%</span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<style>
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
+    -moz-appearance: number-input;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+</style>
+<!-- Copyright -->
+<footer id="footer-page">
+    <div class="container container-mobile">
+                <!-- <a href="" class="copyright-logo" target="_blank">
+            <img src="https://app.utas.co/assets/images/utas-logo-dark.svg?v=2021.06.13" height="20"/>
+        </a> -->
+            </div>
+</footer>
+<script type="text/javascript">
+    window.BASE_URL = 'https://utas.me/';
+    window.FRONTEND_HOST = 'https://utas.me/';
+    window.FB_PIXEL = '';
+    window.GOOGLE_ID = '';
+    window.PUSH_PUBLIC_KEY = 'BMBlr6YznhYMX3NgcWIDRxZXs0sh7tCv7_YCsWcww0ZCv9WGg-tRCXfMEHTiBPCksSqeve1twlbmVAZFv7GSuj0';
+    window.UTAS = "1"
+</script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://utas.me/assets/js/jquery-3.4.1.min.js"></script>
+<script src="https://utas.me/assets/js/jquery.dataTables.min.js"></script>
+<script src="https://utas.me/assets/js/dataTables.responsive.min.js"></script>
+<script src="https://utas.me/assets/js/popper.min.js"></script>
+<script src="https://utas.me/assets/js/bootstrap.min.js"></script>
+<script src="https://utas.me/assets/js/slick.min.js"></script>
+<script src="https://utas.me/assets/js/select2.min.js"></script>
+<script src="https://utas.me/assets/js/trk.js?v=1.2.7"></script>
+<script src="https://utas.me/assets/js/jquery.raty.js"></script>
+<script src="https://utas.me/assets/js/app.js?v=2021.07.15"></script>
+<script src="https://utas.me/assets/js/push.js"></script>
+<div id="is-loading"><img src="https://app.utas.co/assets/images/loading.gif" width="40" height="40"></div>
+
+</body>
+
+</html>
