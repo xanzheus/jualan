@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Get & Download Json From URL</title>
+</head>
+<body>
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+ <script src="FileSaver.min.js"></script> 
+    
+
+<script>
+async function get() {
+	window.BASE_URL = 'https://belanja.bio/';
+	let url = window.BASE_URL + 'ajax-ongkir';
+    let obj = await (await fetch(url)).json();
+    console.log(obj);
+    str = JSON.stringify(obj)
+	var blob = new Blob([str], {type:"application/json;charset=utf-8"});
+	saveAs(blob, "export.json");
+}
+
+
+
+
+
+</script>
+
+<button onclick="get()">Load data & Save Json</button>
+
+</body>
+</html>
